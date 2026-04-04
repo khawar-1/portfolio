@@ -1,0 +1,181 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500&display=swap');
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { font-size: 16px; }
+body {
+  background: #050508;
+  color: #F0EDE6;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 400;
+  line-height: 1.7;
+  overflow-x: hidden;
+  cursor: none;
+}
+a { color: inherit; text-decoration: none; cursor: none; }
+button { cursor: none; }
+img { display: block; max-width: 100%; }
+::selection { background: #C8A97E; color: #050508; }
+
+.font-display { font-family: 'Playfair Display', serif; }
+.font-ui { font-family: 'Space Grotesk', sans-serif; }
+.font-body { font-family: 'DM Sans', sans-serif; }
+.label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #C8A97E;
+}
+
+/* GRAIN */
+.grain {
+  position: fixed;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0;
+  display: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* CUSTOM CURSOR */
+.cursor {
+  position: fixed;
+  width: 20px; height: 20px;
+  border: 1.5px solid #F0EDE6;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10000;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: difference;
+  transition: width 0.3s, height 0.3s, border-color 0.3s;
+}
+.cursor.expand { width: 80px; height: 80px; border-color: #C8A97E; }
+.cursor-label {
+  position: fixed;
+  pointer-events: none;
+  z-index: 10001;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #F0EDE6;
+  mix-blend-mode: difference;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+/* PROGRESS BAR */
+.progress-bar {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  background: #C8A97E;
+  z-index: 9998;
+  width: 0%;
+  transform-origin: left;
+}
+
+/* PRELOADER */
+.preloader-bg {
+  position: fixed;
+  inset: 0;
+  background: #000000;
+  z-index: 9989;
+}
+.preloader-cutout {
+  position: fixed;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 0; height: 0;
+  border: 100vmax solid #000000;
+  box-sizing: content-box;
+  z-index: 9990;
+  pointer-events: none;
+}
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 9991;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.preloader-content { position: relative; z-index: 2; text-align: center; }
+.preloader-logo {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 2rem;
+  color: #C8A97E;
+  margin-bottom: 1.5rem;
+}
+.preloader-counter {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 4rem;
+  font-weight: 300;
+  color: #F0EDE6;
+  letter-spacing: 0.05em;
+}
+.preloader-line {
+  width: 60px; height: 1px;
+  background: #C8A97E;
+  margin: 1rem auto 0;
+  transform: scaleX(0);
+}
+.preloader svg.logo-svg { width: 120px; height: 120px; margin-bottom: 1rem; }
+.preloader svg.logo-svg path {
+  fill: none;
+  stroke: #C8A97E;
+  stroke-width: 2;
+  stroke-dasharray: 300;
+  stroke-dashoffset: 300;
+}
+
+/* SECTION NUMBERS */
+.section-number {
+  position: absolute;
+  left: 2rem; top: 50%;
+  transform: translateY(-50%) rotate(-90deg);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  color: #C8A97E;
+  opacity: 0.5;
+}
+
+/* BUTTONS */
+.btn {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 1rem 2.5rem;
+  border: 1px solid #C8A97E;
+  border-radius: 50px;
+  background: transparent;
+  color: #F0EDE6;
+  position: relative;
+  overflow: hidden;
+  transition: color 0.4s;
+}
+.btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #C8A97E;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: -1;
+}
+.btn:hover::before { transform: scaleX(1); }
+.btn:hover { color: #050508; }
+
+@media (max-width: 768px) {
+  .cursor, .cursor-label { display: none; }
+  body { cursor: auto; }
+  a, button { cursor: pointer; }
+}

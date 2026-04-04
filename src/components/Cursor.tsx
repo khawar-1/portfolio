@@ -22,7 +22,18 @@ export default function Cursor() {
       xTo(e.clientX); yTo(e.clientY);
       xLabel(e.clientX); yLabel(e.clientY);
     };
+
+    const onLeave = () => {
+      gsap.to([cursor, cursorLabel], { opacity: 0, duration: 0.3, ease: 'power2.out' });
+    };
+
+    const onEnter = () => {
+      gsap.to([cursor, cursorLabel], { opacity: 1, duration: 0.3, ease: 'power2.out' });
+    };
+
     window.addEventListener('mousemove', onMove);
+    document.addEventListener('mouseleave', onLeave);
+    document.addEventListener('mouseenter', onEnter);
 
     const addHoverListeners = () => {
       document.querySelectorAll('[data-hover]').forEach(el => {
@@ -45,7 +56,11 @@ export default function Cursor() {
     // Run after DOM is fully painted
     setTimeout(addHoverListeners, 200);
 
-    return () => window.removeEventListener('mousemove', onMove);
+    return () => {
+      window.removeEventListener('mousemove', onMove);
+      document.removeEventListener('mouseleave', onLeave);
+      document.removeEventListener('mouseenter', onEnter);
+    };
   }, []);
 
   return (

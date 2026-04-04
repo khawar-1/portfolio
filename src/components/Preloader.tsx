@@ -9,12 +9,8 @@ export default function Preloader({ onComplete }: PreloaderProps) {
   const bgRef = useRef<HTMLDivElement>(null);
   const cutoutRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-  const counterRef = useRef<HTMLDivElement>(null);
-  const pathRef = useRef<SVGPathElement>(null);
-  const lineRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const counterObj = { val: 0 };
     const tl = gsap.timeline({
       onComplete: () => {
         if (cutoutRef.current) cutoutRef.current.style.display = 'none';
@@ -22,17 +18,9 @@ export default function Preloader({ onComplete }: PreloaderProps) {
       }
     });
 
-    tl.to(pathRef.current, { strokeDashoffset: 0, duration: 1.2, ease: 'power2.inOut' })
-      .to(lineRef.current, { scaleX: 1, duration: 0.6, ease: 'power2.out' }, '-=0.8')
-      .to(counterObj, {
-        val: 100,
-        duration: 1.8,
-        ease: 'power1.inOut',
-        onUpdate: () => {
-          if (counterRef.current) counterRef.current.textContent = String(Math.round(counterObj.val));
-        }
-      }, '-=1.4')
-      .to(contentRef.current, { opacity: 0, scale: 0.95, duration: 0.4, ease: 'power2.in' }, '+=0.2')
+    // Wait 7 seconds to let the CSS animation play, then fade out and do cutout
+    tl.to({}, { duration: 7.0 })
+      .to(contentRef.current, { opacity: 0, scale: 0.95, duration: 0.4, ease: 'power2.in' })
       .add(() => {
         if (bgRef.current) bgRef.current.style.display = 'none';
       })
@@ -49,13 +37,15 @@ export default function Preloader({ onComplete }: PreloaderProps) {
       <div ref={bgRef} className="preloader-bg" />
       <div ref={cutoutRef} className="preloader-cutout" />
       <div className="preloader">
-        <div ref={contentRef} className="preloader-content">
-          <svg className="logo-svg" viewBox="0 0 120 120">
-            <path ref={pathRef} d="M20,100 L60,20 L100,100 M35,70 L85,70" />
-          </svg>
-          <div className="preloader-logo font-display">Alex Mercer</div>
-          <div ref={counterRef} className="preloader-counter">0</div>
-          <div ref={lineRef} className="preloader-line" />
+        <div ref={contentRef} className="loader-wrapper">
+          <span className="loader-letter">L</span>
+          <span className="loader-letter">o</span>
+          <span className="loader-letter">a</span>
+          <span className="loader-letter">d</span>
+          <span className="loader-letter">i</span>
+          <span className="loader-letter">n</span>
+          <span className="loader-letter">g</span>
+          <div className="loader"></div>
         </div>
       </div>
     </>

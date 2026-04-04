@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { TextPlugin } from 'gsap/TextPlugin';
@@ -27,6 +27,14 @@ export default function Index() {
   const heroAnimRef = useRef<(() => void) | null>(null);
 
   useLenis();
+
+  useEffect(() => {
+    // Force manual scroll restoration to prevent browser jumping
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+  }, []);
 
   const handlePreloaderComplete = useCallback(() => {
     setLoaded(true);

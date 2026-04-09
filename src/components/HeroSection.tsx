@@ -7,9 +7,21 @@ interface HeroSectionProps {
   onAnimationReady: (fn: () => void) => void;
 }
 
+const sliderImages = [
+  "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=500&q=80",
+  "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=500&q=80",
+  "https://images.unsplash.com/photo-1507146426996-ef05306b995a?w=500&q=80",
+  "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500&q=80",
+  "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=500&q=80",
+  "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=500&q=80",
+  "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=500&q=80",
+  "https://images.unsplash.com/photo-1488229297570-58520851e868?w=500&q=80"
+];
+
 export default function HeroSection({ onAnimationReady }: HeroSectionProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const scrollTextRef = useRef<HTMLDivElement>(null);
+  const itemsRef = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
     // Scroll text circular letters
@@ -101,7 +113,64 @@ export default function HeroSection({ onAnimationReady }: HeroSectionProps) {
       gsap.delayedCall(0.5, cycleTagline);
     });
 
+    // 3D Slider animation
+    const quantity = 8;
+    const radius = 550;
+    const tiltX = -16;
+    const rotation = { y: 0 };
+    
+    const sliderCtx = gsap.context(() => {
+      gsap.to(rotation, {
+        y: 360,
+        duration: 20,
+        ease: 'none',
+        repeat: -1
+      });
+
+      const updateSlider = () => {
+        const items = itemsRef.current;
+        const itemData: any[] = [];
+
+        items.forEach((item, index) => {
+          if (!item) return;
+          const pos = index + 1;
+          const baseAngle = (pos - 1) * (360 / quantity);
+          const worldAngle = (baseAngle + rotation.y) % 360;
+          const normalized = ((worldAngle % 360) + 360) % 360;
+
+          const rad = (normalized * Math.PI) / 180;
+          const x = Math.sin(rad) * radius;
+          const z = Math.cos(rad) * radius;
+
+          itemData.push({ item, x, z, normalized });
+        });
+
+        // Sort by Z: most negative Z (furthest back) gets lowest z-index
+        itemData.sort((a, b) => a.z - b.z);
+
+        itemData.forEach((data, index) => {
+          const { item, x, z } = data;
+
+          item.style.transform = `perspective(1000px) rotateX(${tiltX}deg) translateX(${x}px) translateZ(${z}px)`;
+
+          // Model is z-index 3, so:
+          if (index < quantity / 2) {
+            item.style.zIndex = (index + 1).toString();      // 1, 2, 3... behind model
+          } else {
+            item.style.zIndex = (index + 2).toString();      // 5, 6, 7, 8... in front of model
+          }
+        });
+      };
+      
+      gsap.ticker.add(updateSlider);
+      
+      return () => {
+        gsap.ticker.remove(updateSlider);
+      };
+    });
+
     return () => {
+      sliderCtx.revert();
       cancelAnimationFrame(rafId);
       window.removeEventListener('mousemove', onMouseMove);
       window.removeEventListener('resize', onResize);
@@ -114,6 +183,22 @@ export default function HeroSection({ onAnimationReady }: HeroSectionProps) {
   return (
     <section className="hero" id="hero">
       <canvas ref={canvasRef} id="hero-canvas" />
+      
+      <div className="slider-container">
+        <div className="slider-inner">
+          {sliderImages.map((src, idx) => (
+            <div 
+              key={idx} 
+              className="slider-item" 
+              ref={(el) => (itemsRef.current[idx] = el)}
+            >
+              <img src={src} alt="" />
+            </div>
+          ))}
+        </div>
+        <div className="slider-model"></div>
+      </div>
+
       <div className="hero-content">
         <div className="hero-label label">Available for work — 2025</div>
         <h1 className="hero-name">

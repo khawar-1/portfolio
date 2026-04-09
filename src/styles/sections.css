@@ -52,7 +52,7 @@
 #hero-canvas { position: absolute; inset: 0; z-index: 0; }
 .hero-content {
   position: relative;
-  z-index: 1;
+  z-index: 10;
   text-align: center;
   max-width: 1200px;
   padding: 0 2rem;
@@ -115,6 +115,45 @@
 @keyframes bounce-chevron {
   0%, 100% { transform: rotate(45deg) translateY(0); }
   50% { transform: rotate(45deg) translateY(6px); }
+}
+
+/* 3D SLIDER (HERO) */
+.slider-container {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 1;
+  pointer-events: none;
+}
+.slider-inner {
+  position: absolute;
+  width: 200px;
+  height: 250px;
+  top: 15%;
+  left: calc(50% - 100px);
+}
+.slider-item {
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.slider-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.slider-model {
+  background-image: url(/hero-a.png);
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-size: auto 130%;
+  background-repeat: no-repeat;
+  background-position: top center;
+  z-index: 3;
 }
 
 /* MARQUEE */

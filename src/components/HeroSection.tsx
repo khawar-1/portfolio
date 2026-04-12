@@ -8,14 +8,15 @@ interface HeroSectionProps {
 }
 
 const sliderImages = [
-  "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=500&q=80",
-  "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=500&q=80",
-  "https://images.unsplash.com/photo-1507146426996-ef05306b995a?w=500&q=80",
-  "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500&q=80",
-  "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=500&q=80",
-  "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=500&q=80",
-  "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=500&q=80",
-  "https://images.unsplash.com/photo-1488229297570-58520851e868?w=500&q=80"
+  "/css.png",
+  "/expressjs.png",
+  "/html.png",
+  "/mongodb.png",
+  "/nextjs.png",
+  "/nodejs.png",
+  "/postgre.png",
+  "/react.png",
+  "/typescript.png"
 ];
 
 export default function HeroSection({ onAnimationReady }: HeroSectionProps) {
@@ -114,7 +115,7 @@ export default function HeroSection({ onAnimationReady }: HeroSectionProps) {
     });
 
     // 3D Slider animation
-    const quantity = 8;
+    const quantity = sliderImages.length;
     const radius = 550;
     const tiltX = -16;
     const rotation = { y: 0 };
@@ -145,7 +146,6 @@ export default function HeroSection({ onAnimationReady }: HeroSectionProps) {
           itemData.push({ item, x, z, normalized });
         });
 
-        // Sort by Z: most negative Z (furthest back) gets lowest z-index
         itemData.sort((a, b) => a.z - b.z);
 
         itemData.forEach((data, index) => {
@@ -153,11 +153,10 @@ export default function HeroSection({ onAnimationReady }: HeroSectionProps) {
 
           item.style.transform = `perspective(1000px) rotateX(${tiltX}deg) translateX(${x}px) translateZ(${z}px)`;
 
-          // Model is z-index 3, so:
-          if (index < quantity / 2) {
-            item.style.zIndex = (index + 1).toString();      // 1, 2, 3... behind model
+          if (z < 0) {
+            item.style.zIndex = (10 + index).toString();      // Behind model
           } else {
-            item.style.zIndex = (index + 2).toString();      // 5, 6, 7, 8... in front of model
+            item.style.zIndex = (60 + index).toString();      // In front of model and text
           }
         });
       };

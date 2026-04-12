@@ -18,8 +18,8 @@ export default function Preloader({ onComplete }: PreloaderProps) {
       }
     });
 
-    // Wait 7 seconds to let the CSS animation play, then fade out and do cutout
-    tl.to({}, { duration: 7.0 })
+    // Wait 3.5 seconds to let the CSS animation play, then fade out and do cutout
+    tl.to({}, { duration: 3.5 })
       .to(contentRef.current, { opacity: 0, scale: 0.95, duration: 0.4, ease: 'power2.in' })
       .add(() => {
         if (bgRef.current) bgRef.current.style.display = 'none';

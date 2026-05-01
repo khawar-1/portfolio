@@ -7,11 +7,10 @@ export default function ProcessSection() {
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    let ctx: gsap.Context;
-
-    // Delay by 1 frame so Lenis initializes first
-    const rafId = requestAnimationFrame(() => {
-      ctx = gsap.context(() => {
+    // Create context immediately to ensure proper cleanup
+    const ctx = gsap.context(() => {
+      // Delay internal setup slightly to let Lenis settle
+      const timeoutId = setTimeout(() => {
         gsap.to('#timelineProgress', {
           height: '100%',
           ease: 'none',
@@ -44,13 +43,14 @@ export default function ProcessSection() {
           tl.to(node, { scale: 1, boxShadow: '0 0 20px rgba(200,169,126,0.4)', duration: 0.5, ease: 'back.out(2)' }, 0)
             .to(content, { opacity: 1, x: 0, duration: 0.7, ease: 'power3.out' }, 0.2);
         });
-      }, sectionRef);
-    });
 
-    return () => {
-      cancelAnimationFrame(rafId);
-      if (ctx) ctx.revert();
-    };
+        ScrollTrigger.refresh();
+      }, 100);
+
+      return () => clearTimeout(timeoutId);
+    }, sectionRef);
+
+    return () => ctx.revert();
   }, []);
 
   return (

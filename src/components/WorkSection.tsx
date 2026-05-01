@@ -7,11 +7,10 @@ export default function WorkSection() {
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    let ctx: gsap.Context;
-
-    // Delay by 1 frame so Lenis initializes first
-    const rafId = requestAnimationFrame(() => {
-      ctx = gsap.context(() => {
+    // Create context immediately to ensure proper cleanup
+    const ctx = gsap.context(() => {
+      // Delay internal setup slightly to let Lenis settle
+      const timeoutId = setTimeout(() => {
         document.querySelectorAll('.project').forEach(proj => {
           const img = proj.querySelector('.project-image') as HTMLElement;
           const imgEl = img?.querySelector('img') as HTMLElement;
@@ -34,13 +33,14 @@ export default function WorkSection() {
             .to(imgEl, { scale: 1, duration: 1.2, ease: 'power2.out' }, 0.2)
             .to(titleWords, { y: 0, duration: 0.8, ease: 'power3.out', stagger: 0.1 }, 0.3);
         });
-      }, sectionRef);
-    });
 
-    return () => {
-      cancelAnimationFrame(rafId);
-      if (ctx) ctx.revert();
-    };
+        ScrollTrigger.refresh();
+      }, 100);
+
+      return () => clearTimeout(timeoutId);
+    }, sectionRef);
+
+    return () => ctx.revert();
   }, []);
 
   return (

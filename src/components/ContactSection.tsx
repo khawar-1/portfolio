@@ -69,7 +69,7 @@ export default function ContactSection() {
           <button type="submit" className="btn" data-hover>Send Message</button>
         </form>
       </div>
-      <div className="section-number">07 — CONTACT</div>
+      <div className="section-number">06 — CONTACT</div>
     </section>
   );
 }

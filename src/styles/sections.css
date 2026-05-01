@@ -273,6 +273,13 @@
     background-size: auto 50%;
     background-position: bottom 50% center;
   }
+
+  .hero-tagline {
+    color: #C8A97E;
+    font-weight: 400;
+    text-shadow: none;
+    -webkit-text-stroke: 0.5px rgba(255, 255, 255, 0.8);
+  }
 }
 
 /* MARQUEE */

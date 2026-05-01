@@ -60,13 +60,10 @@ export default function AboutSection() {
     const tech = techRef.current;
     if (!section || !hook || !story || !tech) return;
 
-    let ctx: gsap.Context;
-
-    // Delay by 1 frame so Lenis initializes first.
-    // We move this OUTSIDE the context so the context records the animations correctly
-    // once the frame actually fires.
-    const rafId = requestAnimationFrame(() => {
-      ctx = gsap.context(() => {
+    // Create context immediately to ensure proper cleanup
+    const ctx = gsap.context(() => {
+      // Delay internal setup slightly to let Lenis settle
+      const timeoutId = setTimeout(() => {
         // Story & tech start invisible
         gsap.set([story, tech], { opacity: 0, y: 40, immediateRender: true });
         gsap.set(hook, { opacity: 1, y: 0, immediateRender: true });
@@ -90,13 +87,15 @@ export default function AboutSection() {
           // Story → Tech
           .to(story, { opacity: 0, y: -40, duration: 1 }, '+=0.8')
           .to(tech, { opacity: 1, y: 0, duration: 1 }, '<0.3');
-      }, section); // Scope to section
-    });
 
-    return () => {
-      cancelAnimationFrame(rafId);
-      if (ctx) ctx.revert();
-    };
+        // Force a refresh to ensure pinning is calculated correctly
+        ScrollTrigger.refresh();
+      }, 100);
+
+      return () => clearTimeout(timeoutId);
+    }, section);
+
+    return () => ctx.revert();
   }, []);
 
   return (

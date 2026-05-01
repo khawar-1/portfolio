@@ -1,9 +1,12 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState, FormEvent } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 export default function ContactSection() {
   const headlineRef = useRef<HTMLHeadingElement>(null);
+  
+  // Form State
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
 
   useEffect(() => {
     if (headlineRef.current) {
@@ -39,6 +42,37 @@ export default function ContactSection() {
     }
   }, []);
 
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setStatus('submitting');
+
+    const form = e.currentTarget;
+    const data = new FormData(form);
+
+    try {
+      // Replace YOUR_FORMSPREE_ID with your actual Formspree endpoint ID (e.g., 'mvoeqbpl')
+      const response = await fetch('https://formspree.io/f/mykozpyj', {
+        method: 'POST',
+        body: data,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        setStatus('success');
+        form.reset();
+        setTimeout(() => setStatus('idle'), 5000); // Reset button after 5 seconds
+      } else {
+        setStatus('error');
+        setTimeout(() => setStatus('idle'), 5000);
+      }
+    } catch (error) {
+      setStatus('error');
+      setTimeout(() => setStatus('idle'), 5000);
+    }
+  };
+
   return (
     <section className="contact" id="contact">
       <div className="contact-aurora" />
@@ -50,23 +84,33 @@ export default function ContactSection() {
           <a href="https://github.com/khawar-1" target="_blank" rel="noopener noreferrer" className="social-link" data-magnetic data-hover>GitHub</a>
           <a href="https://linkedin.com/in/khawarmohiuddin00" target="_blank" rel="noopener noreferrer" className="social-link" data-magnetic data-hover>LinkedIn</a>
         </div>
-        <form className="contact-form" onSubmit={e => e.preventDefault()}>
+        <form className="contact-form" onSubmit={handleSubmit}>
           <div className="form-group">
-            <input type="text" id="name" placeholder=" " required />
+            <input type="text" id="name" name="name" placeholder=" " required />
             <label htmlFor="name">Your Name</label>
             <div className="form-underline" />
           </div>
           <div className="form-group">
-            <input type="email" id="email" placeholder=" " required />
+            <input type="email" id="email" name="email" placeholder=" " required />
             <label htmlFor="email">Your Email</label>
             <div className="form-underline" />
           </div>
           <div className="form-group full">
-            <textarea id="message" placeholder=" " required />
+            <textarea id="message" name="message" placeholder=" " required />
             <label htmlFor="message">Your Message</label>
             <div className="form-underline" />
           </div>
-          <button type="submit" className="btn" data-hover>Send Message</button>
+          <button 
+            type="submit" 
+            className="btn" 
+            data-hover 
+            disabled={status === 'submitting'}
+          >
+            {status === 'idle' && 'Send Message'}
+            {status === 'submitting' && 'Sending...'}
+            {status === 'success' && 'Message Sent! ✓'}
+            {status === 'error' && 'Error. Try Again'}
+          </button>
         </form>
       </div>
       <div className="section-number">06 — CONTACT</div>

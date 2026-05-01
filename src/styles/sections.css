@@ -242,7 +242,7 @@
 @media (max-width: 768px) {
   .hero {
     align-items: flex-start;
-    padding-top: 10vh;
+    padding-top: 7vh;
   }
 
   .hero-content {

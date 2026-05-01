@@ -60,46 +60,42 @@ export default function AboutSection() {
     const tech = techRef.current;
     if (!section || !hook || !story || !tech) return;
 
-    // Track our own ScrollTrigger so we only kill it, not others
-    let st: ScrollTrigger | undefined;
-    let tl: gsap.core.Timeline | null = null;
+    let ctx: gsap.Context;
 
-    // Delay by 1 frame so Lenis initializes first and ScrollTrigger
-    // can properly measure pinned heights
+    // Delay by 1 frame so Lenis initializes first.
+    // We move this OUTSIDE the context so the context records the animations correctly
+    // once the frame actually fires.
     const rafId = requestAnimationFrame(() => {
-      // Story & tech start invisible — CSS also sets this as a fallback
-      gsap.set([story, tech], { opacity: 0, y: 40, immediateRender: true });
-      gsap.set(hook, { opacity: 1, y: 0, immediateRender: true });
+      ctx = gsap.context(() => {
+        // Story & tech start invisible
+        gsap.set([story, tech], { opacity: 0, y: 40, immediateRender: true });
+        gsap.set(hook, { opacity: 1, y: 0, immediateRender: true });
 
-      tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: section,
-          start: 'top top',
-          end: '+=200%',
-          pin: true,
-          pinSpacing: true,
-          scrub: 1,
-          invalidateOnRefresh: true,
-        },
-      });
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: section,
+            start: 'top top',
+            end: '+=200%',
+            pin: true,
+            pinSpacing: true,
+            scrub: 1,
+            invalidateOnRefresh: true,
+          },
+        });
 
-      // Store our ScrollTrigger instance for targeted cleanup
-      st = tl.scrollTrigger!;
-
-      tl
-        // Hook → Story
-        .to(hook, { opacity: 0, y: -40, duration: 1 })
-        .to(story, { opacity: 1, y: 0, duration: 1 }, '<0.3')
-        // Story → Tech
-        .to(story, { opacity: 0, y: -40, duration: 1 }, '+=0.8')
-        .to(tech, { opacity: 1, y: 0, duration: 1 }, '<0.3');
+        tl
+          // Hook → Story
+          .to(hook, { opacity: 0, y: -40, duration: 1 })
+          .to(story, { opacity: 1, y: 0, duration: 1 }, '<0.3')
+          // Story → Tech
+          .to(story, { opacity: 0, y: -40, duration: 1 }, '+=0.8')
+          .to(tech, { opacity: 1, y: 0, duration: 1 }, '<0.3');
+      }, section); // Scope to section
     });
 
     return () => {
       cancelAnimationFrame(rafId);
-      // Only kill OUR timeline and ScrollTrigger — leave others untouched
-      if (tl) tl.kill();
-      if (st) st.kill();
+      if (ctx) ctx.revert();
     };
   }, []);
 
@@ -143,11 +139,6 @@ export default function AboutSection() {
                 end-to-end. I have integrated AI APIs into full-stack platforms and worked
                 directly with clients to manage requirements and delivery.
               </p>
-              <div className="ac-stats">
-                <div className="ac-stat"><span className="stat-num">10+</span><span className="stat-label">PROJECTS</span></div>
-                <div className="ac-stat"><span className="stat-num">1+</span> <span className="stat-label">YEARS</span></div>
-                <div className="ac-stat"><span className="stat-num">5+</span> <span className="stat-label">CLIENTS</span></div>
-              </div>
             </div>
           </div>
           <div className="ac-right-col">
@@ -159,8 +150,8 @@ export default function AboutSection() {
         </div>
         <div className="ac-tech-bottom">
           <div className="ac-skill-cloud">
-            {['REACT', 'NEXT.JS', 'NODE.JS', 'TYPESCRIPT', 'PYTHON', 'FASTAPI', 'MONGODB',
-              'POSTGRESQL', 'AWS', 'LANGCHAIN', 'FAISS', 'THREE.JS', 'GSAP', 'TAILWIND CSS', 'STRIPE'
+            {['REACT', 'NEXT.JS', 'NODE.JS', 'TYPESCRIPT', 'PYTHON', 'MONGODB',
+              'POSTGRESQL', 'AWS', 'TAILWIND CSS'
             ].map((skill, i) => (
               <span key={skill} className={`ac-skill-tag tag-${i}`}>{skill}</span>
             ))}
@@ -188,18 +179,13 @@ export default function AboutSection() {
             databases to building high-performance frontends with clean code, I ship
             real products end-to-end.
           </p>
-          <div className="ac-stats">
-            <div className="ac-stat"><span className="stat-num">10+</span><span className="stat-label">PROJECTS</span></div>
-            <div className="ac-stat"><span className="stat-num">1+</span> <span className="stat-label">YEARS</span></div>
-            <div className="ac-stat"><span className="stat-num">5+</span> <span className="stat-label">CLIENTS</span></div>
-          </div>
         </div>
 
         {/* Panel 3 — Tech */}
         <div ref={techRef} className="ac-mobile-panel ac-mobile-tech">
           <div className="ac-skill-cloud">
-            {['REACT', 'NEXT.JS', 'NODE.JS', 'TYPESCRIPT', 'PYTHON', 'FASTAPI', 'MONGODB',
-              'POSTGRESQL', 'AWS', 'LANGCHAIN', 'FAISS', 'THREE.JS', 'GSAP', 'TAILWIND CSS', 'STRIPE'
+            {['REACT', 'NEXT.JS', 'NODE.JS', 'TYPESCRIPT', 'PYTHON', 'MONGODB',
+              'POSTGRESQL', 'AWS', 'TAILWIND CSS'
             ].map((skill, i) => (
               <span key={skill} className={`ac-skill-tag tag-${i}`}>{skill}</span>
             ))}

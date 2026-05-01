@@ -4,32 +4,47 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { projects } from '../data/portfolio';
 
 export default function WorkSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+
   useEffect(() => {
-    document.querySelectorAll('.project').forEach(proj => {
-      const img = proj.querySelector('.project-image') as HTMLElement;
-      const imgEl = img?.querySelector('img') as HTMLElement;
-      const titleWords = proj.querySelectorAll('.project-title .word-inner');
+    let ctx: gsap.Context;
 
-      gsap.set(img, { clipPath: 'inset(0 100% 0 0)' });
-      gsap.set(imgEl, { scale: 1.1 });
-      gsap.set(titleWords, { y: '110%' });
+    // Delay by 1 frame so Lenis initializes first
+    const rafId = requestAnimationFrame(() => {
+      ctx = gsap.context(() => {
+        document.querySelectorAll('.project').forEach(proj => {
+          const img = proj.querySelector('.project-image') as HTMLElement;
+          const imgEl = img?.querySelector('img') as HTMLElement;
+          const titleWords = proj.querySelectorAll('.project-title .word-inner');
 
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: proj,
-          start: 'top 75%',
-          toggleActions: 'play reverse play reverse'
-        }
-      });
+          gsap.set(img, { clipPath: 'inset(0 100% 0 0)' });
+          gsap.set(imgEl, { scale: 1.1 });
+          gsap.set(titleWords, { y: '110%' });
 
-      tl.to(img, { clipPath: 'inset(0 0% 0 0)', duration: 1.2, ease: 'power3.inOut' }, 0)
-        .to(imgEl, { scale: 1, duration: 1.2, ease: 'power2.out' }, 0.2)
-        .to(titleWords, { y: 0, duration: 0.8, ease: 'power3.out', stagger: 0.1 }, 0.3);
+          const tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: proj,
+              start: 'top 75%',
+              toggleActions: 'play reverse play reverse',
+              invalidateOnRefresh: true,
+            }
+          });
+
+          tl.to(img, { clipPath: 'inset(0 0% 0 0)', duration: 1.2, ease: 'power3.inOut' }, 0)
+            .to(imgEl, { scale: 1, duration: 1.2, ease: 'power2.out' }, 0.2)
+            .to(titleWords, { y: 0, duration: 0.8, ease: 'power3.out', stagger: 0.1 }, 0.3);
+        });
+      }, sectionRef);
     });
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      if (ctx) ctx.revert();
+    };
   }, []);
 
   return (
-    <section className="work" id="work">
+    <section ref={sectionRef} className="work" id="work">
       <div className="work-header">
         <div className="label" style={{ marginBottom: '1rem' }}>Portfolio</div>
         <h2>Selected Work</h2>

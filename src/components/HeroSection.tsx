@@ -94,7 +94,6 @@ export default function HeroSection({ onAnimationReady }: HeroSectionProps) {
       heroTl
         .to('.hero-name .word-inner', { y: 0, duration: 1.4, ease: 'power4.out', stagger: 0.08 })
         .to('.hero-label', { opacity: 1, duration: 0.8, ease: 'power2.out' }, '-=1.0')
-        .to('.hero-lines', { width: '40%', duration: 1.2, ease: 'power3.out' }, '-=1.0')
         .to('.hero-ctas', { opacity: 1, duration: 0.8, ease: 'power2.out' }, '-=0.8')
         .to('.scroll-indicator', { opacity: 1, duration: 0.8, ease: 'power2.out' }, '-=0.6');
 
@@ -210,7 +209,7 @@ export default function HeroSection({ onAnimationReady }: HeroSectionProps) {
           <a href="#contact" className="btn" data-hover>Get In Touch</a>
         </div>
       </div>
-      <div className="hero-lines" />
+
       <div className="scroll-indicator">
         <div className="scroll-text" ref={scrollTextRef} id="scrollText" />
         <div className="scroll-chevron" />

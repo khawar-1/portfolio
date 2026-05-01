@@ -93,7 +93,6 @@ export default function HeroSection({ onAnimationReady }: HeroSectionProps) {
       const heroTl = gsap.timeline();
       heroTl
         .to('.hero-name .word-inner', { y: 0, duration: 1.4, ease: 'power4.out', stagger: 0.08 })
-        .to('.hero-label', { opacity: 1, duration: 0.8, ease: 'power2.out' }, '-=1.0')
         .to('.hero-ctas', { opacity: 1, duration: 0.8, ease: 'power2.out' }, '-=0.8')
         .to('.scroll-indicator', { opacity: 1, duration: 0.8, ease: 'power2.out' }, '-=0.6');
 
@@ -198,7 +197,7 @@ export default function HeroSection({ onAnimationReady }: HeroSectionProps) {
       </div>
 
       <div className="hero-content">
-        <div className="hero-label label">Available for work — 2024</div>
+
         <h1 className="hero-name">
           <span className="word"><span className="word-inner">Khawar</span></span>
           <span className="word"><span className="word-inner">Mohi Ud Din</span></span>

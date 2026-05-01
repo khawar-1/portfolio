@@ -225,7 +225,9 @@ img { display: block; max-width: 100%; }
   padding: 1rem 2.5rem;
   border: 1px solid #C8A97E;
   border-radius: 50px;
-  background: transparent;
+  background: rgba(5, 5, 8, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   color: #F0EDE6;
   position: relative;
   overflow: hidden;

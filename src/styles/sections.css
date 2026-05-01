@@ -239,6 +239,39 @@
   z-index: 50;
 }
 
+@media (max-width: 768px) {
+  .hero {
+    align-items: flex-start;
+    padding-top: 10vh;
+  }
+
+  .hero-content {
+    height: 80vh;
+    /* Takes up the available space */
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hero-ctas {
+    margin-top: auto;
+    /* Pushes the buttons to the very bottom */
+    padding-bottom: 5vh;
+    /* Adjust this to move buttons up/down slightly */
+  }
+
+  .slider-inner {
+    width: 30px;
+    height: 30px;
+    top: 37%;
+    left: calc(50% - 15px);
+  }
+
+  .slider-model {
+    background-size: auto 50%;
+    background-position: bottom 50% center;
+  }
+}
+
 /* MARQUEE */
 .marquee-section {
   background: #C8A97E;
@@ -284,7 +317,25 @@
   flex-direction: column;
   perspective: none;
   background-color: #000;
-  /* Pitch black background */
+}
+
+/* Desktop panels visible, mobile panels hidden by default */
+.ac-desktop-only {
+  display: flex;
+}
+
+/* Mobile panels — hidden by default, shown only on mobile */
+.ac-mobile-panels {
+  display: none;
+}
+
+.ac-mobile-panel {
+  position: absolute;
+  z-index: 30;
+  pointer-events: none;
+  width: 90%;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 /* ── Avatar Background ── */
@@ -630,28 +681,117 @@
   }
 }
 
-/* ── Responsive ── */
+/* ── Mobile Responsive (About) ── */
 @media (max-width: 768px) {
-  .ac-page-content {
-    padding: 2rem;
+
+  /* Hide desktop text layout */
+  .ac-desktop-only {
+    display: none !important;
   }
 
-  .ac-headline {
-    font-size: 2.4rem;
+  .about-cinematic .section-number {
+    display: none;
   }
 
-  .ac-orbit-icon img {
-    width: 38px;
-    height: 38px;
+  /* ── Mobile panels container ── */
+  .ac-mobile-panels {
+    display: block;
+    position: absolute;
+    inset: 0;
+    z-index: 30;
+    pointer-events: none;
+  }
+
+  /* All panels are stacked at the same absolute position */
+  .ac-mobile-panel {
+    position: absolute;
+    top: 10vh;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    pointer-events: none;
+  }
+
+  /* Story & Tech hidden by default — GSAP fades them in */
+  .ac-mobile-story,
+  .ac-mobile-tech {
+    opacity: 0;
+  }
+
+  /* Hook panel */
+  .ac-mobile-hook .ac-main-quote {
+    text-align: center;
+    font-size: clamp(1.5rem, 7vw, 2.2rem);
+    line-height: 1.25;
+    color: #f0ede6;
+    text-shadow: 0 5px 25px rgba(0, 0, 0, 0.7);
+  }
+
+  /* Story panel */
+  .ac-mobile-story h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: var(--ac-accent);
+    margin-bottom: 0.8rem;
+  }
+
+  .ac-mobile-story p {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: rgba(240, 237, 230, 0.75);
+    margin-bottom: 1.5rem;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+  }
+
+  .ac-mobile-story .ac-stats {
+    gap: 1.5rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
+  }
+
+
+
+  .ac-mobile-tech .ac-skill-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.6rem;
+  }
+
+  .ac-mobile-tech .ac-skill-tag {
+    font-size: 0.65rem;
+    padding: 0.5rem 1rem;
+  }
+
+  /* ── Avatar & visual elements ── */
+  .ac-avatar-img {
+    object-position: center;
+    transform: scale(2.2) translateY(10.4%);
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .ac-orbit-wrapper {
+    top: 71%;
+    transform: translate(-40%, -40%) scale(0.5);
+  }
+
+  .ac-nebula {
+    top: 71%;
+    width: 400px;
+    height: 400px;
+  }
+
+  .ac-env-bg {
+    top: 64%;
+    width: 150vw;
+    height: 150vh;
   }
 
   .ac-orbit-icon span {
     display: none;
-  }
-
-  .ac-center-icon {
-    width: 52px;
-    height: 52px;
   }
 }
 

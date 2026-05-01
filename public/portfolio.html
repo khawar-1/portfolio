@@ -766,77 +766,6 @@ img { display: block; max-width: 100%; }
 }
 
 /* ══════════════════════════════════════════
-   TESTIMONIALS
-   ══════════════════════════════════════════ */
-.testimonials {
-  padding: 8rem 3rem;
-  position: relative;
-  text-align: center;
-  overflow: hidden;
-}
-.testimonials-header { margin-bottom: 4rem; }
-.testimonials-header h2 {
-  font-family: 'Playfair Display', serif;
-  font-style: italic;
-  font-size: clamp(2rem, 4vw, 3.5rem);
-}
-.testimonial-bg-quote {
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  font-family: 'Playfair Display', serif;
-  font-size: 30vw;
-  color: rgba(200,169,126,0.04);
-  pointer-events: none;
-  line-height: 0.8;
-}
-.testimonial-wrap {
-  position: relative;
-  max-width: 700px;
-  margin: 0 auto;
-  min-height: 250px;
-}
-.testimonial-item {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  opacity: 0;
-}
-.testimonial-item.active { opacity: 1; }
-.testimonial-text {
-  font-family: 'Playfair Display', serif;
-  font-style: italic;
-  font-size: clamp(1.2rem, 2vw, 1.6rem);
-  line-height: 1.7;
-  margin-bottom: 2rem;
-}
-.testimonial-author {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 0.8rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: #C8A97E;
-}
-.testimonial-dots {
-  display: flex;
-  gap: 0.8rem;
-  justify-content: center;
-  margin-top: 3rem;
-}
-.testimonial-dot {
-  width: 8px; height: 8px;
-  border-radius: 50%;
-  background: rgba(240,237,230,0.2);
-  border: none;
-  cursor: pointer;
-  transition: background 0.3s;
-  padding: 0;
-}
-.testimonial-dot.active { background: #C8A97E; }
-
-/* ══════════════════════════════════════════
    CONTACT
    ══════════════════════════════════════════ */
 .contact {
@@ -1325,37 +1254,6 @@ img { display: block; max-width: 100%; }
 </section>
 
 <!-- ═══════════════════════════════════════
-     TESTIMONIALS
-     ═══════════════════════════════════════ -->
-<section class="testimonials" id="testimonials">
-  <div class="testimonial-bg-quote">&ldquo;</div>
-  <div class="testimonials-header">
-    <div class="label" style="margin-bottom: 1rem;">Kind Words</div>
-    <h2>Testimonials</h2>
-  </div>
-  <div class="testimonial-wrap">
-    <div class="testimonial-item active" data-testimonial="0">
-      <p class="testimonial-text">"Alex transformed our digital presence into something truly extraordinary. The attention to detail in every animation and interaction is unmatched. Our conversion rate doubled within the first month."</p>
-      <div class="testimonial-author">Sarah Chen — CEO, Nebula Studios</div>
-    </div>
-    <div class="testimonial-item" data-testimonial="1">
-      <p class="testimonial-text">"Working with Alex felt like collaborating with an artist who happens to code. Every scroll, every hover, every transition tells our brand's story. This is the future of web design."</p>
-      <div class="testimonial-author">Marcus Reid — Creative Director, Aether Collective</div>
-    </div>
-    <div class="testimonial-item" data-testimonial="2">
-      <p class="testimonial-text">"I've worked with dozens of developers. Alex is the only one who made me say 'wow' at every review. The 3D experiences and motion design elevated our product beyond anything we imagined."</p>
-      <div class="testimonial-author">Elena Vasquez — Founder, Monolith Labs</div>
-    </div>
-  </div>
-  <div class="testimonial-dots">
-    <button class="testimonial-dot active" data-dot="0"></button>
-    <button class="testimonial-dot" data-dot="1"></button>
-    <button class="testimonial-dot" data-dot="2"></button>
-  </div>
-  <div class="section-number">06 — TESTIMONIALS</div>
-</section>
-
-<!-- ═══════════════════════════════════════
      CONTACT
      ═══════════════════════════════════════ -->
 <section class="contact" id="contact">
@@ -1822,38 +1720,6 @@ img { display: block; max-width: 100%; }
      tl.to(node, { scale: 1, boxShadow: '0 0 20px rgba(200,169,126,0.4)', duration: 0.5, ease: 'back.out(2)' }, 0)
        .to(content, { opacity: 1, x: 0, duration: 0.7, ease: 'power3.out' }, 0.2);
    });
-
-  // ══════════════════════════════════════════
-  // TESTIMONIALS
-  // ══════════════════════════════════════════
-  const testimonials = document.querySelectorAll('.testimonial-item');
-  const dots = document.querySelectorAll('.testimonial-dot');
-  let currentTest = 0;
-  let autoRotate;
-
-  function showTestimonial(idx) {
-    testimonials.forEach((t, i) => {
-      if (i === idx) {
-        gsap.to(t, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' });
-        t.classList.add('active');
-      } else {
-        gsap.to(t, { opacity: 0, y: 20, duration: 0.4, ease: 'power2.in' });
-        t.classList.remove('active');
-      }
-    });
-    dots.forEach((d, i) => d.classList.toggle('active', i === idx));
-    currentTest = idx;
-  }
-
-  dots.forEach(dot => {
-    dot.addEventListener('click', () => {
-      clearInterval(autoRotate);
-      showTestimonial(parseInt(dot.dataset.dot));
-      autoRotate = setInterval(() => showTestimonial((currentTest + 1) % 3), 5000);
-    });
-  });
-
-  autoRotate = setInterval(() => showTestimonial((currentTest + 1) % 3), 5000);
 
   // ══════════════════════════════════════════
   // CONTACT HEADLINE SPLIT

@@ -23,7 +23,7 @@ export default function Navbar() {
 
   return (
     <nav ref={navRef} className="nav">
-      <a href="#" className="nav-logo" data-hover>AM.</a>
+      <a href="#" className="nav-logo" data-hover>KM.</a>
       <ul className="nav-links">
         <li><a href="#about" data-hover onClick={(e) => { e.preventDefault(); scrollTo('#about'); }}>About</a></li>
         <li><a href="#work" data-hover onClick={(e) => { e.preventDefault(); scrollTo('#work'); }}>Work</a></li>

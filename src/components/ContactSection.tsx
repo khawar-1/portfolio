@@ -45,11 +45,10 @@ export default function ContactSection() {
       <div className="contact-content">
         <div className="label" style={{ marginBottom: '1rem' }}>Get In Touch</div>
         <h2 ref={headlineRef} className="font-display" id="contactHeadline">Let's Create Something Legendary</h2>
-        <a href="mailto:hello@alexmercer.dev" className="contact-email" data-hover>hello@alexmercer.dev</a>
+        <a href="mailto:khawarmohiuddin0@gmail.com" className="contact-email" data-hover>khawarmohiuddin0@gmail.com</a>
         <div className="contact-socials">
-          <a href="#" className="social-link" data-magnetic data-hover>GitHub</a>
-          <a href="#" className="social-link" data-magnetic data-hover>LinkedIn</a>
-          <a href="#" className="social-link" data-magnetic data-hover>Dribbble</a>
+          <a href="https://github.com/khawar-1" target="_blank" rel="noopener noreferrer" className="social-link" data-magnetic data-hover>GitHub</a>
+          <a href="https://linkedin.com/in/khawarmohiuddin00" target="_blank" rel="noopener noreferrer" className="social-link" data-magnetic data-hover>LinkedIn</a>
         </div>
         <form className="contact-form" onSubmit={e => e.preventDefault()}>
           <div className="form-group">

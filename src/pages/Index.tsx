@@ -15,7 +15,6 @@ import AboutSection from '../components/AboutSection';
 import ServicesSection from '../components/ServicesSection';
 import WorkSection from '../components/WorkSection';
 import ProcessSection from '../components/ProcessSection';
-import TestimonialsSection from '../components/TestimonialsSection';
 import ContactSection from '../components/ContactSection';
 import Footer from '../components/Footer';
 import { useLenis } from '../hooks/useLenis';
@@ -67,7 +66,6 @@ export default function Index() {
         <ServicesSection />
         <WorkSection />
         <ProcessSection />
-        <TestimonialsSection />
         <ContactSection />
       </main>
       <Footer />

@@ -98,7 +98,7 @@ export default function HeroSection({ onAnimationReady }: HeroSectionProps) {
         .to('.hero-ctas', { opacity: 1, duration: 0.8, ease: 'power2.out' }, '-=0.8')
         .to('.scroll-indicator', { opacity: 1, duration: 0.8, ease: 'power2.out' }, '-=0.6');
 
-      const taglines = ['Creative Developer', 'UI/UX Designer', 'Visual Storyteller', 'Motion Artist'];
+      const taglines = ['Full-stack Developer', 'AI Solutions Architect', 'Creative Coder', 'Software Engineer'];
       let tagIdx = 0;
       const cycleTagline = () => {
         gsap.to('.hero-tagline', {
@@ -116,7 +116,6 @@ export default function HeroSection({ onAnimationReady }: HeroSectionProps) {
 
     // 3D Slider animation
     const quantity = sliderImages.length;
-    const radius = 550;
     const tiltX = -16;
     const rotation = { y: 0 };
     
@@ -129,6 +128,7 @@ export default function HeroSection({ onAnimationReady }: HeroSectionProps) {
       });
 
       const updateSlider = () => {
+        const currentRadius = window.innerWidth <= 768 ? 150 : 550;
         const items = itemsRef.current;
         const itemData: any[] = [];
 
@@ -140,8 +140,8 @@ export default function HeroSection({ onAnimationReady }: HeroSectionProps) {
           const normalized = ((worldAngle % 360) + 360) % 360;
 
           const rad = (normalized * Math.PI) / 180;
-          const x = Math.sin(rad) * radius;
-          const z = Math.cos(rad) * radius;
+          const x = Math.sin(rad) * currentRadius;
+          const z = Math.cos(rad) * currentRadius;
 
           itemData.push({ item, x, z, normalized });
         });
@@ -199,10 +199,10 @@ export default function HeroSection({ onAnimationReady }: HeroSectionProps) {
       </div>
 
       <div className="hero-content">
-        <div className="hero-label label">Available for work — 2025</div>
+        <div className="hero-label label">Available for work — 2024</div>
         <h1 className="hero-name">
-          <span className="word"><span className="word-inner">Alex</span></span>
-          <span className="word"><span className="word-inner">Mercer</span></span>
+          <span className="word"><span className="word-inner">Khawar</span></span>
+          <span className="word"><span className="word-inner">Mohi Ud Din</span></span>
         </h1>
         <div className="hero-tagline" />
         <div className="hero-ctas">

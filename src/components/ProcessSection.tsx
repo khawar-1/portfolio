@@ -75,7 +75,6 @@ export default function ProcessSection() {
           </div>
         ))}
       </div>
-      <div className="section-number">05 — PROCESS</div>
     </section>
   );
 }

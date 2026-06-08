@@ -68,7 +68,6 @@ export default function TestimonialsSection() {
           />
         ))}
       </div>
-      <div className="section-number">06 — TESTIMONIALS</div>
     </section>
   );
 }

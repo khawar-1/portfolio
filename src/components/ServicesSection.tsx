@@ -41,7 +41,6 @@ export default function ServicesSection() {
           </div>
         </div>
       ))}
-      <div className="section-number">03 — SERVICES</div>
     </section>
   );
 }

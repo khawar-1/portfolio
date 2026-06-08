@@ -29,33 +29,33 @@ export interface Testimonial {
 export const projects: Project[] = [
   {
     id: 1,
+    category: 'AI Voice & Mobile',
+    title: 'Voxa AI',
+    titleWords: ['Voxa', 'AI'],
+    description: 'A mobile audio enhancement app that transcribes, cleans, and grammatically improves voice recordings. Powered by Faster-Whisper, Gemini 2.0, and IndexTTS2 — served via Dockerized FastAPI microservices on GPU infrastructure.',
+    image: 'https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=900&q=80&auto=format',
+    imageAlt: 'Voxa AI audio enhancement app',
+    link: 'https://github.com/Usman-Khan49/Voxa-AI',
+  },
+  {
+    id: 2,
     category: 'Full-stack Platform',
     title: 'Lex Connect',
     titleWords: ['Lex', 'Connect'],
-    description: 'A legal marketplace with LiveKit video consultations, Stripe payments, and real-time Socket.io notifications.',
+    description: 'Full-stack legal marketplace where clients search, book, and consult lawyers — built end-to-end with REST APIs and React frontend. Integrated LiveKit (WebRTC) for live video, Stripe for secure payments, and Socket.io for real-time booking notifications.',
     image: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=900&q=80&auto=format',
     imageAlt: 'Lex Connect legal marketplace',
     link: '#',
   },
   {
-    id: 2,
+    id: 3,
     category: 'AI & LLM',
     title: 'RAG AI Chatbot',
     titleWords: ['RAG', 'AI', 'Chatbot'],
-    description: 'Query legal documents using RAG with FAISS vector store, Gemini/Groq, and FastAPI backend.',
+    description: 'Full-stack AI chatbot that queries a custom legal document database via FAISS vector store — grounding every response in real case data instead of hallucinated answers. Backend retrieves semantically relevant chunks fed into Groq with structured context for attorney-grade accuracy.',
     image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=900&q=80&auto=format',
     imageAlt: 'RAG AI Chatbot interface',
-    link: '#',
-  },
-  {
-    id: 3,
-    category: 'WebGL Experience',
-    title: 'Cinematic Canvas',
-    titleWords: ['Cinematic', 'Canvas'],
-    description: 'High-performance portfolio with Three.js particle systems and GSAP scroll-driven animations at 60fps.',
-    image: 'https://images.unsplash.com/photo-1635776062127-d379bfcba9f8?w=900&q=80&auto=format',
-    imageAlt: 'Cinematic Canvas portfolio project',
-    link: '#',
+    link: 'https://github.com/khawar-1/pak-legal-ragbot',
   },
   {
     id: 4,
@@ -65,7 +65,7 @@ export const projects: Project[] = [
     description: 'E2E encrypted chat using Web Crypto API (AES-256, ECDH) ensuring absolute privacy.',
     image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=900&q=80&auto=format',
     imageAlt: 'End-to-End Encrypted Chat',
-    link: '#',
+    link: 'https://github.com/Khawar13/Secure-chat',
   },
 ];
 
@@ -94,6 +94,11 @@ export const services: Service[] = [
     num: '05',
     title: 'UI/UX Engineering',
     description: 'Translating complex designs into pixel-perfect code. Using GSAP and Tailwind CSS to ensure smooth, responsive, and accessible interfaces.',
+  },
+  {
+    num: '06',
+    title: 'Cloud Architecture & AWS',
+    description: 'Deploying scalable, highly available systems on AWS. Designing secure cloud infrastructure with CI/CD pipelines, containerization (Docker), and serverless computing.',
   },
 ];
 

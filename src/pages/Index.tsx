@@ -3,9 +3,6 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { TextPlugin } from 'gsap/TextPlugin';
 
-import '../styles/global.css';
-import '../styles/sections.css';
-
 import Preloader from '../components/Preloader';
 import Cursor from '../components/Cursor';
 import Navbar from '../components/Navbar';

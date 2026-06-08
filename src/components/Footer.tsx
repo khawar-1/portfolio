@@ -17,7 +17,6 @@ export default function Footer() {
     <footer className="footer">
       <div className="footer-bg-name font-display">Khawar Mohi Ud Din</div>
       <div className="footer-content">
-        <div className="footer-copy">&copy; 2024-2025 Khawar Mohi Ud Din. All Rights Reserved.</div>
         <ul className="footer-links">
           <li><a href="#hero" data-hover>Home</a></li>
           <li><a href="#work" data-hover>Work</a></li>

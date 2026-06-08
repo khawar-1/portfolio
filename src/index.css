@@ -98,8 +98,9 @@ All colors MUST be HSL.
   * {
     @apply border-border;
   }
-
-  body {
-    @apply bg-background text-foreground;
-  }
+  /* body background and color are intentionally set in src/styles/global.css
+     using raw hex values (#050508, #F0EDE6) for this dark portfolio theme.
+     Do NOT add `body { @apply bg-background text-foreground; }` here —
+     in Vite dev mode, style injection order is non-deterministic and
+     the Tailwind layer would override global.css, breaking the dark theme. */
 }

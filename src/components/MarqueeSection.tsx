@@ -20,7 +20,7 @@ export default function MarqueeSection() {
     return () => { tween.kill(); };
   }, []);
 
-  const text = 'CREATIVE DEVELOPER ✦ UI/UX DESIGN ✦ MOTION DESIGN ✦ 3D EXPERIENCE ✦ BRAND IDENTITY ✦ WEB ANIMATION ✦\u00A0';
+  const text = 'CREATIVE DEVELOPER ✦ UI/UX DESIGN ✦ AWS CLOUD ARCHITECTURE ✦ AI PIPELINES ✦  Backend ✦ BRAND IDENTITY ✦ WEB ANIMATION ✦\u00A0';
 
   return (
     <section className="marquee-section">

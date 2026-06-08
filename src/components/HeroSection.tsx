@@ -213,7 +213,6 @@ export default function HeroSection({ onAnimationReady }: HeroSectionProps) {
         <div className="scroll-text" ref={scrollTextRef} id="scrollText" />
         <div className="scroll-chevron" />
       </div>
-      <div className="section-number">01 — HERO</div>
     </section>
   );
 }

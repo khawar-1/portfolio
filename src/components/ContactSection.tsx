@@ -113,7 +113,6 @@ export default function ContactSection() {
           </button>
         </form>
       </div>
-      <div className="section-number">06 — CONTACT</div>
     </section>
   );
 }

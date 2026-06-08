@@ -46,14 +46,19 @@ export default function WorkSection() {
   return (
     <section ref={sectionRef} className="work" id="work">
       <div className="work-header">
-        <div className="label" style={{ marginBottom: '1rem' }}>Portfolio</div>
         <h2>Selected Work</h2>
       </div>
       {projects.map((project, index) => (
         <div key={project.id} className="project">
-          <div className="project-image" data-hover-view>
-            <img src={project.image} alt={project.imageAlt} />
-          </div>
+          {project.link !== '#' ? (
+            <a href={project.link} target="_blank" rel="noopener noreferrer" className="project-image" data-hover-view>
+              <img src={project.image} alt={project.imageAlt} />
+            </a>
+          ) : (
+            <div className="project-image" data-hover-view>
+              <img src={project.image} alt={project.imageAlt} />
+            </div>
+          )}
           <div className="project-info">
             <div className="label project-category">{project.category}</div>
             <h3 className="project-title">
@@ -62,11 +67,12 @@ export default function WorkSection() {
               ))}
             </h3>
             <p className="project-desc">{project.description}</p>
-            <a href={project.link} className="project-link" data-hover>View Project →</a>
+            {project.link !== '#' && (
+              <a href={project.link} target="_blank" rel="noopener noreferrer" className="project-link" data-hover>View on GitHub →</a>
+            )}
           </div>
         </div>
       ))}
-      <div className="section-number">04 — WORK</div>
     </section>
   );
 }

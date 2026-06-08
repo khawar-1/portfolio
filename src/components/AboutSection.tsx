@@ -9,7 +9,7 @@ const ORBIT_ICONS = [
   { src: '/css.png', alt: 'CSS', label: 'CSS', offset: 45 },
   { src: '/typescript.png', alt: 'TypeScript', label: 'TS', offset: 90 },
   { src: '/nodejs.png', alt: 'Node.js', label: 'Node', offset: 135 },
-  { src: '/nextjs.png', alt: 'Next.js', label: 'Next.js', offset: 180 },
+  { src: '/aws.svg', alt: 'AWS', label: 'AWS', offset: 180 },
   { src: '/mongodb.png', alt: 'MongoDB', label: 'MongoDB', offset: 225 },
   { src: '/postgre.png', alt: 'PostgreSQL', label: 'Postgres', offset: 270 },
   { src: '/expressjs.png', alt: 'Express', label: 'Express', offset: 315 },
@@ -149,8 +149,8 @@ export default function AboutSection() {
         </div>
         <div className="ac-tech-bottom">
           <div className="ac-skill-cloud">
-            {['REACT', 'NEXT.JS', 'NODE.JS', 'TYPESCRIPT', 'PYTHON', 'MONGODB',
-              'POSTGRESQL', 'AWS', 'TAILWIND CSS'
+            {['REACT', 'AWS', 'NODE.JS', 'TYPESCRIPT', 'PYTHON', 'MONGODB',
+              'POSTGRESQL', 'DOCKER', 'TAILWIND CSS'
             ].map((skill, i) => (
               <span key={skill} className={`ac-skill-tag tag-${i}`}>{skill}</span>
             ))}
@@ -183,8 +183,8 @@ export default function AboutSection() {
         {/* Panel 3 — Tech */}
         <div ref={techRef} className="ac-mobile-panel ac-mobile-tech">
           <div className="ac-skill-cloud">
-            {['REACT', 'NEXT.JS', 'NODE.JS', 'TYPESCRIPT', 'PYTHON', 'MONGODB',
-              'POSTGRESQL', 'AWS', 'TAILWIND CSS'
+            {['REACT', 'AWS', 'NODE.JS', 'TYPESCRIPT', 'PYTHON', 'MONGODB',
+              'POSTGRESQL', 'DOCKER', 'TAILWIND CSS'
             ].map((skill, i) => (
               <span key={skill} className={`ac-skill-tag tag-${i}`}>{skill}</span>
             ))}
@@ -193,7 +193,6 @@ export default function AboutSection() {
 
       </div>
 
-      <div className="section-number">02 — ABOUT</div>
     </section>
   );
 }

@@ -32,7 +32,7 @@ export const projects: Project[] = [
     category: 'AI Desktop Assistant',
     title: 'Project Furi',
     titleWords: ['Project', 'Furi'],
-    description: 'A 73,000+ line local-first AI desktop assistant built with Electron, React, and FastAPI. Features a multi-agent planner with 15+ tools (file, terminal, email, calendar, browser), vision-first browser automation via Playwright, full voice control (local Whisper STT + streaming TTS with push-to-talk), ambient screen sensing, a proactive initiative engine, semantic memory with 7-layer contact identity resolution, Google OAuth integration, teachable routines, and 2,100+ automated tests.',
+    description: 'A local-first AI desktop assistant built with Electron, React, and FastAPI. Features a multi-agent planner with 15+ tools (file, terminal, email, calendar, browser), vision-first browser automation via Playwright, full voice control (local Whisper STT + streaming TTS with push-to-talk), ambient screen sensing, a proactive initiative engine, semantic memory with 7-layer contact identity resolution, Google OAuth integration, teachable routines, and 2,100+ automated tests.',
     image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=900&q=80&auto=format',
     imageAlt: 'Project Furi AI Desktop Assistant',
     link: 'https://github.com/khawar-1/Project-Furi',

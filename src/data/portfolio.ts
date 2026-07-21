@@ -29,6 +29,16 @@ export interface Testimonial {
 export const projects: Project[] = [
   {
     id: 1,
+    category: 'AI Desktop Assistant',
+    title: 'Project Furi',
+    titleWords: ['Project', 'Furi'],
+    description: 'A 73,000+ line local-first AI desktop assistant built with Electron, React, and FastAPI. Features a multi-agent planner with 15+ tools (file, terminal, email, calendar, browser), vision-first browser automation via Playwright, full voice control (local Whisper STT + streaming TTS with push-to-talk), ambient screen sensing, a proactive initiative engine, semantic memory with 7-layer contact identity resolution, Google OAuth integration, teachable routines, and 2,100+ automated tests.',
+    image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=900&q=80&auto=format',
+    imageAlt: 'Project Furi AI Desktop Assistant',
+    link: 'https://github.com/khawar-1/Project-Furi',
+  },
+  {
+    id: 2,
     category: 'AI Voice & Mobile',
     title: 'Voxa AI',
     titleWords: ['Voxa', 'AI'],
@@ -38,7 +48,7 @@ export const projects: Project[] = [
     link: 'https://github.com/Usman-Khan49/Voxa-AI',
   },
   {
-    id: 2,
+    id: 3,
     category: 'Full-stack Platform',
     title: 'Lex Connect',
     titleWords: ['Lex', 'Connect'],
@@ -48,7 +58,7 @@ export const projects: Project[] = [
     link: '#',
   },
   {
-    id: 3,
+    id: 4,
     category: 'AI & LLM',
     title: 'RAG AI Chatbot',
     titleWords: ['RAG', 'AI', 'Chatbot'],
@@ -56,16 +66,6 @@ export const projects: Project[] = [
     image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=900&q=80&auto=format',
     imageAlt: 'RAG AI Chatbot interface',
     link: 'https://github.com/khawar-1/pak-legal-ragbot',
-  },
-  {
-    id: 4,
-    category: 'Cybersecurity',
-    title: 'Secure Chat',
-    titleWords: ['Secure', 'Chat'],
-    description: 'E2E encrypted chat using Web Crypto API (AES-256, ECDH) ensuring absolute privacy.',
-    image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=900&q=80&auto=format',
-    imageAlt: 'End-to-End Encrypted Chat',
-    link: 'https://github.com/Khawar13/Secure-chat',
   },
 ];
 
@@ -141,8 +141,8 @@ export const testimonials: Testimonial[] = [
 ];
 
 export const skills = [
-  'React', 'Next.js', 'Node.js', 'TypeScript', 'Python', 'FastAPI', 
-  'MongoDB', 'PostgreSQL', 'AWS', 'LangChain', 'FAISS', 'Three.js', 
-  'GSAP', 'Tailwind CSS', 'Docker', 'Stripe', 'Git', 'REST APIs'
+  'React', 'Next.js', 'Node.js', 'TypeScript', 'Python', 'FastAPI', 'Electron',
+  'MongoDB', 'PostgreSQL', 'SQLite', 'Qdrant', 'AWS', 'LangChain', 'FAISS',
+  'Groq', 'Playwright', 'GSAP', 'Tailwind CSS', 'Docker', 'Stripe', 'Git', 'REST APIs'
 ];
 
